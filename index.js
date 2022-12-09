@@ -1,5 +1,6 @@
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
+const { InMemoryLRUCache } = require("@apollo/utils.keyvaluecache");
 
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
@@ -9,6 +10,7 @@ const { MONGODB } = require("./config.js");
 const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({
+  cache: new InMemoryLRUCache(),
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req }),
