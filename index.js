@@ -5,12 +5,11 @@ const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
 const { MONGODB } = require("./config.js");
 
-import { InMemoryLRUCache } from "apollo-server";
 
 const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({
-  cache: new InMemoryLRUCache(),
+  cache: 0,
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req }),
